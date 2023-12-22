@@ -1,4 +1,4 @@
-import subprocess
+import subprocess as sp
 import re
 
 
@@ -23,7 +23,7 @@ class Dot_Conf:
     @property
     def user_settings_from_system(self: dict) -> dict:
         user_settings_sys = {}
-        lspci_drivers = subprocess.run(["lspci", "-nnk"], stdout=subprocess.PIPE)
+        lspci_drivers = sp.run(["lspci", "-nnk"], stdout=sp.PIPE)
         lspci_drivers = lspci_drivers.stdout.decode("utf-8").split("\n")
         lspci_drivers = [re.search("[es]:.*", txt) for txt in lspci_drivers]
         for driver in lspci_drivers:
