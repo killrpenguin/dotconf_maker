@@ -30,12 +30,13 @@ class Dot_Conf:
             if driver is not None:
                 print(f"{driver}")
                 txt = driver.group().strip().split(" ")
-                user_settings_sys.update({txt[1].upper():"y"})
+                user_settings_sys.update({txt[1].upper(): "y"})
         return user_settings_sys
 
     def compare(self, *args, **kwargs) -> any:
         for itm in self.user_settings_from_system.items():
             print(itm[0])
+
 
 if __name__ == "__main__":
     testing = Dot_Conf()
