@@ -1,16 +1,27 @@
-# This is a sample Python script.
+from os import system
+import re
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# grep -e 'CONFIG_*=y' /usr/src/linux/.config | grep -v "not set" /usr/src/linux/.config > ~/Documents/config_file
+class My_Dot_Conf:
+    def __init__(self):
+        self.user_settings_hmap = {} #hash map key: {config name: mode or setting}
 
+    def user_settings(self):
+        with open("user_settings") as dot_config:
+            dot_config = dot_config.read().strip().split()
+            # regex searches for strings starting with "CON"
+            dot_config = [re.search("^[C].[N].*", txt) for txt in dot_config]
+            for val in dot_config:
+                if val is not None:
+                    txt = val.group().split("=", 1)
+                    self.user_settings_hmap.update({txt[0]:txt[1]})
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+            for tst in self.user_settings_hmap.items():
+                print(f"{tst}")
 
+    def get_config(self):
+        pass
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    testing = My_Dot_Conf()
+    testing.user_settings()
