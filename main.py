@@ -38,6 +38,7 @@ class Dot_Conf:
             print(itm[0])
 
 
+
 if __name__ == "__main__":
     testing = Dot_Conf()
     testing.compare()
